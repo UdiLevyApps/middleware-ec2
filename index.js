@@ -18,7 +18,7 @@ app.get('/test', (req, res) => {
 app.get('*', async (req, res) => {
     try {
         const url = `${targetDomain}${req.originalUrl}`;
-        console.log(`url path ${url}`)
+        console.log(`get url path ${url}`)
         const response = await axios.get(`${targetDomain}${req.originalUrl}`,{
             headers: {
                 'Authorization': authorizationToken
@@ -33,6 +33,8 @@ app.get('*', async (req, res) => {
 // Forward POST requests
 app.post('*', async (req, res) => {
     try {
+        const url = `${targetDomain}${req.originalUrl}`;
+        console.log(`post url path ${url}`)
         const response = await axios.post(`${targetDomain}${req.originalUrl}`, req.body, {
             headers: {
                 'Authorization': authorizationToken
