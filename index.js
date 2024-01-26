@@ -1,15 +1,22 @@
 const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+const path = require('path');
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 const targetDomain = process.env.TARGET_DOMAIN;
 const authorizationToken = process.env.AUTHORIZATION_TOKEN;
+const publicDirectoryPath = path.join(__dirname, 'public', 'html');
 
 // Use bodyParser to parse JSON and urlencoded request bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.get('/', (req, res) => {
+    // Handle the GET request for '/test' here
+    // res.send('Success! The Node.js application is running.');
+    res.sendFile(path.join(publicDirectoryPath, 'index.html'));
+});
 app.get('/test', (req, res) => {
     // Handle the GET request for '/test' here
     res.send(`This is a response from the /test route. Server running on http://localhost:${port}`);
